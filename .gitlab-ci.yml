@@ -1,0 +1,11 @@
+stages:
+  - build
+
+build-job:
+  stage: build
+  script:
+    - echo "Repository checked out successfully"
+    - ls -la
+    - git log -1 --oneline
+  only:
+    - branches
