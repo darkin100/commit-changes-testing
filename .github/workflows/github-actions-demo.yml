@@ -1,6 +1,11 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [pull_request]
+
+permissions:
+  pull-requests: write  # Required for posting comments
+  contents: read        # Required for checking out code
+
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -8,11 +13,6 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: |
-            gh --version
 
       - id: do-a-review
         uses: darkin100/i-am-reviewed@v1.0
@@ -21,5 +21,6 @@ jobs:
           pr-number: ${{ github.event.pull_request.number }}
           google-cloud-project: ${{ secrets.GOOGLE_CLOUD_PROJECT }}
           google-cloud-location: ${{ secrets.GOOGLE_CLOUD_LOCATION }}
+          google-cloud-credentials: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
         
 
