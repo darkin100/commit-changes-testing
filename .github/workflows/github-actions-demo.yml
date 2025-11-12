@@ -1,6 +1,6 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+on: [pull_request]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -14,12 +14,12 @@ jobs:
       - run: |
             gh --version
 
-      - name: Checkout code
-        uses: actions/checkout@v5
-
       - id: do-a-review
         uses: darkin100/i-am-reviewed@v1.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          pr-number: ${{ github.event.pull_request.number }}
+          google-cloud-project: ${{ secrets.GOOGLE_CLOUD_PROJECT }}
+          google-cloud-location: ${{ secrets.GOOGLE_CLOUD_LOCATION }}
         
 

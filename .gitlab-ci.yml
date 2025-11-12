@@ -8,6 +8,6 @@ build-job:
     - docker:dind
   script:
     - echo "Running code review with pr-review-agent"
-    - docker run --rm -v $CI_PROJECT_DIR:/workspace europe-west2-docker.pkg.dev/iamreleased/docker-images/pr-review-agent:latest
+    - docker run --rm -v $CI_PROJECT_DIR:/workspace europe-west2-docker.pkg.dev/iamreleased/docker-images/pr-review-agent-gitlab:latest
   only:
     - branches
