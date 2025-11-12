@@ -3,9 +3,11 @@ stages:
 
 build-job:
   stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   script:
-    - echo "Repository checked out successfully"
-    - ls -la
-    - git log -1 --oneline
+    - echo "Running code review with pr-review-agent"
+    - docker run --rm -v $CI_PROJECT_DIR:/workspace europe-west2-docker.pkg.dev/iamreleased/docker-images/pr-review-agent:latest
   only:
     - branches
