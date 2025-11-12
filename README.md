@@ -9,3 +9,4 @@ This repo i sused for testing commits on GitHub and Gitlab.
 
     https://github.com/darkin100/commit-changes-testing
 
+Trigger Build.
