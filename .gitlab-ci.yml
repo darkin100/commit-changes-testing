@@ -1,9 +1,6 @@
 stages:
   - build
 
-rules:
-  - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
 build-job:
   stage: build
   image: docker:latest
@@ -29,3 +26,5 @@ build-job:
       -e "GOOGLE_CLOUD_LOCATION=$GOOGLE_CLOUD_LOCATION"
       -e "GOOGLE_CLOUD_CREDENTIALS_JSON=$GOOGLE_CLOUD_CREDENTIALS_JSON"
       europe-west2-docker.pkg.dev/iamreleased/docker-images/pr-review-agent-gitlab:latest
+  rules:
+   - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
