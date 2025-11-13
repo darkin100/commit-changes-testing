@@ -8,6 +8,13 @@ build-job:
     - docker:dind
   script:
     - echo "Running code review with pr-review-agent"
+    - echo "GITLAB_TOKEN $GITLAB_TOKEN"
+    - echo "GIT_REPOSITORY $GIT_REPOSITORY"
+    - echo "GOOGLE_CLOUD_PROJECT $GOOGLE_CLOUD_PROJECT"
+    - echo "GOOGLE_CLOUD_LOCATION $GOOGLE_CLOUD_LOCATION"
+    - echo "GOOGLE_CLOUD_CREDENTIALS_JSON $GOOGLE_CLOUD_CREDENTIALS_JSON"
+    - echo "GIT_PR_NUMBER $GIT_PR_NUMBER"
+    - echo "GITLAB_API_URL $GITLAB_API_URL"
     - >
       docker run --rm -v $CI_PROJECT_DIR:/workspace
       -e GITLAB_TOKEN="$CI_JOB_TOKEN"
