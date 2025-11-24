@@ -8,6 +8,24 @@ build-job:
     - docker:dind
   script:
     - echo "Running code review with pr-review-agent"
-    - docker run --rm -v $CI_PROJECT_DIR:/workspace europe-west2-docker.pkg.dev/iamreleased/docker-images/pr-review-agent-gitlab:latest
-  only:
-    - branches
+    - echo "CI_PROJECT_PATH=$CI_PROJECT_PATH"
+    - echo "CI_MERGE_REQUEST_IID=$CI_MERGE_REQUEST_IID"
+    - echo "GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT"
+    - echo "GOOGLE_CLOUD_LOCATION=$GOOGLE_CLOUD_LOCATION"
+    - echo "GITLAB_TOKEN=$GITLAB_TOKEN"
+    - >
+      docker run --rm -v "$CI_PROJECT_DIR:/workspace"
+      -e "GITLAB_TOKEN=$GITLAB_TOKEN"
+      -e "CI_SERVER_HOST=$CI_SERVER_HOST"
+      -e "CI_SERVER_PROTOCOL=$CI_SERVER_PROTOCOL"
+      -e "CI_SERVER_URL=$CI_SERVER_URL"
+      -e "CI_PROJECT_PATH=$CI_PROJECT_PATH"
+      -e "CI_MERGE_REQUEST_IID=$CI_MERGE_REQUEST_IID"
+      -e "GIT_REPOSITORY=$CI_PROJECT_PATH"
+      -e "GIT_PR_NUMBER=$CI_MERGE_REQUEST_IID"
+      -e "GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT"
+      -e "GOOGLE_CLOUD_LOCATION=$GOOGLE_CLOUD_LOCATION"
+      -e "GOOGLE_CLOUD_CREDENTIALS_JSON=$GOOGLE_CLOUD_CREDENTIALS_JSON"
+      europe-west2-docker.pkg.dev/iamreleased/docker-images/pr-review-agent-gitlab:latest
+  rules:
+   - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
