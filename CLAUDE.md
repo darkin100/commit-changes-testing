@@ -50,6 +50,11 @@ Runs on merge request events using Docker-in-Docker to execute a PR review agent
 
 Uses the image: `europe-west2-docker.pkg.dev/iamreleased/docker-images/pr-review-agent-gitlab:latest`
 
+External Documentation reference
+
+    https://docs.gitlab.com/topics/build_your_application/
+
+    
 ## Claude Code Permissions
 
 The `.claude/settings.local.json` pre-authorizes common git operations:
@@ -59,3 +64,7 @@ The `.claude/settings.local.json` pre-authorizes common git operations:
 - Homebrew installations
 
 These commands won't require additional user approval when executed by Claude Code.
+
+## External Documentation
+
+For the Gitlab CI 
